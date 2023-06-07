@@ -5,6 +5,8 @@ const app = express();
 app.use(bodyparser.json())
 
 const userController = require("./controller/userControl")
+const {checkUser} = require("./controller/signin")
+const {updateUser} = require("./controller/update")
 
 mongoose.connect("mongodb+srv://abhi25252525:Reactjs@cluster0.whjnfaa.mongodb.net/chat_app", {
     useNewUrlParser: true
@@ -16,6 +18,9 @@ mongoose.connect("mongodb+srv://abhi25252525:Reactjs@cluster0.whjnfaa.mongodb.ne
 
 
 app.use("/create_user",userController.createUser)
+app.use("/check_user", checkUser)
+app.put("/update_user", updateUser)
+
 
 
 app.listen(3000,()=>{
