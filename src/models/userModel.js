@@ -2,12 +2,12 @@ const mongoose = require ("mongoose")
 
 const userSchema = new mongoose.Schema({
 
-    Fname:{
+    fname:{
         type: String,
         required:true
     },
 
-    Lname:{
+    lname:{
         type: String,
         required: true
     },
@@ -27,11 +27,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+
+    is_deactivate:{
+        type: Boolean,
+        default : false
     }
-
-},
-
-{timeStamp:true}
+}, {timestamps : true}
 
 );
 

@@ -1,11 +1,11 @@
 const userModel = require("../models/userModel");
-
+const  { isValid,isValidName, isValidTitle, isValidEmail, isValidPassword} = require("../utility/validations")
 // Create User API
 
 
 const createUser = async function (req, res) {
     try{
-        let {fname, lname, title, email, password} = req.body;
+        let {fname, lname, title, email, password, validation} = req.body;
 
         if(Object.keys(req.body).length<1) 
         return res.status(400).send({ msg: "Insert Data : BAD REQUEST"})
@@ -53,6 +53,10 @@ const createUser = async function (req, res) {
         if(!isValidPassword(password)) {
             return res.status(400).send({msg:"Minimum eight, atleast one letter and one number"})
         }
+
+        // if(!isValidValidation(is_deleted)) {
+        //     return res.status(400).send({message : 'Only in 0 or 1'})
+        // }
 
         let savedData = await userModel.create(req.body);
         return res.status(200).send({status:true, data: savedData});

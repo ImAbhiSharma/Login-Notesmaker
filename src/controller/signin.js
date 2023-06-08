@@ -20,8 +20,8 @@ const checkUser = async function (req, res) {
 
        
 
-        if(checklogin) return res.send("logged-in")
-        else res.send("not a valid user")
+        if(checklogin) return res.send({status:"logged-in", data : checklogin })
+        else res.send("Either Email or Password is incorrect")
 
         
     }
