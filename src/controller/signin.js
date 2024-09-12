@@ -18,10 +18,9 @@ const checkUser = async function (req, res) {
 
         let checklogin = await signinModel.findOne({email:email, password:password})
 
-       
 
         if(checklogin) return res.send({status:"logged-in", data : checklogin })
-        else res.send("Either Email or Password is incorrect")
+        else res.send({status:"Either Email or Password is incorrect"})
 
         
     }

@@ -51,7 +51,7 @@ const createUser = async function (req, res) {
         }
 
         if(!isValidPassword(password)) {
-            return res.status(400).send({msg:"Minimum eight, atleast one letter and one number"})
+            return res.status(400).send({msg:"Password must be of minimum eight characters, atleast one letter and one number"})
         }
 
         // if(!isValidValidation(is_deleted)) {

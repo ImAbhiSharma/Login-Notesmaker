@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login|Notes Buddy </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="flex items-center justify-center min-h-screen"
+        style="background-color: #F5BA14; font-family: Poetsen One, sans-serif; ">
+        <!-- Card Container -->
+        <div
+            class="relative flex flex-col space-x-5 md:max-w-[1000px] md:min-w[800px] bg-white md:flex-row md:space-y-0 md:m-0 rounded-2xl shadow-md">
+
+            <div class="flex flex-col pb-5 items-center">
+                <h1 class="font-extrabold text-3xl m-8 mx-16 text-zinc-700">Come let's Sign up</h1>
+                <h2 class="mx-16 my-3 text-slate-500 font-normal">Welcome to Notes Buddy, sign up for your personalize
+                    notes which you can access from anywhere, anytime!
+                </h2>
+
+
+                <input class="mx-16 my-5 px-5 py-3 border border-slate-300 rounded-2xl" id="fName" type="text"
+                placeholder="First Name">
+            <input class="mx-16 my-5 px-5 py-3 border border-slate-300 rounded-2xl" id="lName" type="text"
+                placeholder="Last Name">
+            <input class="mx-16 my-5 px-5 py-3 border border-slate-300 rounded-2xl" id="title" type="text"
+                placeholder="Title (Mr/Mrs/Miss)">
+            <input class="mx-16 my-5 px-5 py-3 border border-slate-300 rounded-2xl" id="email" type="email"
+                placeholder="Email">
+            <input class="mx-16 my-5 px-5 py-3 border border-slate-300 rounded-2xl" id="password" type="password"
+                placeholder="Password">
+
+                <p id="errorMessage" style="color: red; text-align: center; "></p>
+
+                <button id="signupButton"
+                    class="md:flex-1 rounded-lg py-5 transition duration-200 text-slate-50 bg-yellow-400 shadow-sm font-semibold hover:translate-y-[-5px] hover:shadow-md hover:shadow-yellow-400 w-1/3"
+                    style="margin: 0.5rem;" type="button">Sign up
+                </button>
+
+
+
+
+
+
+                <div class="flex flex-col items-center border-b pb-10 m-2 space-y-5 mx-20">
+                    <p class="my-3 cursor-pointer text-base text-yellow-500 hover:text-yellow-700 duration-200">
+                        Already a user?
+                    </p>
+
+
+                    <a href="/" class="w-full text-center">
+                        <button id="loginButton"
+                            class="md:flex-1 rounded-lg py-5 transition duration-200 text-slate-50 bg-yellow-400 shadow-sm font-semibold hover:translate-y-[-5px] hover:shadow-md hover:shadow-yellow-400 w-full"
+                            style="margin: 0.5rem;" type="button">Log in</button>
+                    </a>
+                </div>
+
+
+            </div>
+            <img src="/assets/books.png" class="object-content max-w-[400px] hidden rounded-md md:block" />
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('signupButton').addEventListener('click', async function () {
+            var fname = document.getElementById('fName').value;
+            var lname = document.getElementById('lName').value;
+            var title = document.getElementById('title').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var errorMessage = document.getElementById('errorMessage');
+
+            // Simple validation
+            if (!fname || !lname || !title || !email || !password) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'Please fill in all fields!';
+                return;
+            }
+
+            // Email validation regex
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'Please enter a valid email!';
+                return;
+            }
+
+            
+
+            // Send data to backend
+            try {
+                let response = await fetch('/create_user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        fname, 
+                        lname, 
+                        title, 
+                        email, 
+                        password })
+                });
+
+
+                let data = await response.json();
+                console.log(data);
+
+                if (data.status === true) {
+                    alert('Signup successful! Redirecting to login...');
+                    window.location.href = '/'; // Redirect to login page
+                }
+
+                else {
+                    errorMessage.innerHTML = data.msg;
+                }
+                
+            } catch (error) {
+                alert('An error occurred during signup');
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
