@@ -15,7 +15,7 @@ const createUser = async function (req, res) {
         }
 
         if (!isValidName(fname)) {
-            return res.status(400).send({ msg: "fname only take alphabets"})
+            return res.status(400).send({ msg: "First Name only take alphabets"})
         }
 
         if(!isValid(lname)) {
@@ -23,7 +23,7 @@ const createUser = async function (req, res) {
         }
 
         if(!isValidName(lname)){
-            return res.status(400).send({msg: "lname only take alphabets"})
+            return res.status(400).send({msg: "Last Name only take alphabets"})
         }
 
         if(!isValid(title)) {
@@ -51,7 +51,7 @@ const createUser = async function (req, res) {
         }
 
         if(!isValidPassword(password)) {
-            return res.status(400).send({msg:"Password must be of minimum eight characters, atleast one letter and one number"})
+            return res.status(400).send({msg:"Password must be minimum of eight characters, atleast one of each letter, number and special character"})
         }
 
         // if(!isValidValidation(is_deleted)) {
