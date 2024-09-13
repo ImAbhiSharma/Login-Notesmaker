@@ -8,3 +8,20 @@ Database: Utilizes MongoDB for storing user credentials and managing user data.
 Front-End: Designed with Tailwind CSS for a responsive and modern user interface.
 Integration: Connects to the backend via EJS for dynamic content rendering.
 Functionality: Users can sign up, log in, and manage their accounts. After successful login, users are redirected to the Notes Buddy application.
+
+Features
+User registration and login with MongoDB database integration.
+Full CRUD functionality for user account management.
+Responsive design with Tailwind CSS.
+Seamless redirection to the Notes Buddy application upon successful login.
+Getting Started
+Clone the repository: git clone [repository-url]
+Install dependencies: npm install
+Start the server: npm start
+Navigate to http://localhost:3000 in your browser to view the application.
+Technologies Used
+Node.js
+MongoDB
+EJS
+Tailwind CSS
+RESTful APIs
